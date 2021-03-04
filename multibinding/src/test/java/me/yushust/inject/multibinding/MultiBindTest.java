@@ -1,5 +1,8 @@
-package me.yushust.inject;
+package me.yushust.inject.multibinding;
 
+import me.yushust.inject.Injector;
+import me.yushust.inject.multibinding.builder.MultiBinder;
+import me.yushust.inject.multibinding.builder.MultiBindingModule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +16,7 @@ public class MultiBindTest {
   @Test
   public void test() {
 
-    Injector injector = Injector.create(binder -> {
+    Injector injector = Injector.create((MultiBindingModule) binder -> {
 
       binder.multibind(String.class)
           .asList()

@@ -2,8 +2,6 @@ package me.yushust.inject.impl;
 
 import me.yushust.inject.Binder;
 import me.yushust.inject.provision.std.generic.GenericProvider;
-import me.yushust.inject.assisted.ValueFactory;
-import me.yushust.inject.assisted.provision.ToFactoryProvider;
 import me.yushust.inject.key.Key;
 import me.yushust.inject.key.TypeReference;
 import me.yushust.inject.provision.Providers;
@@ -20,12 +18,6 @@ public interface LinkedBuilder<R,T> extends Binder.Linked<R, T> {
   default R toGenericProvider(GenericProvider<? extends T> provider) {
     Validate.notNull(provider, "provider");
     return toProvider(new ToGenericProvider<>(provider));
-  }
-
-  @Override
-  default void toFactory(Class<? extends ValueFactory> factory) {
-    Validate.notNull(factory, "factory");
-    toProvider(new ToFactoryProvider<>(factory));
   }
 
   @Override

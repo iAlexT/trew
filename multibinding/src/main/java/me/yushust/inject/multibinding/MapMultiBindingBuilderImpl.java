@@ -1,9 +1,10 @@
 package me.yushust.inject.multibinding;
 
-import me.yushust.inject.Binder;
 import me.yushust.inject.impl.BinderImpl;
 import me.yushust.inject.impl.LinkedBuilder;
 import me.yushust.inject.key.Key;
+import me.yushust.inject.multibinding.builder.KeyBinder;
+import me.yushust.inject.multibinding.builder.MapMultiBindingBuilder;
 import me.yushust.inject.provision.Providers;
 import me.yushust.inject.provision.StdProvider;
 import me.yushust.inject.scope.Scope;
@@ -12,7 +13,8 @@ import me.yushust.inject.util.Validate;
 import javax.inject.Provider;
 import java.util.Map;
 
-class MapMultiBindingBuilderImpl<K, V> implements Binder.MapMultiBindingBuilder<K, V> {
+class MapMultiBindingBuilderImpl<K, V>
+    implements MapMultiBindingBuilder<K, V> {
 
   private final BinderImpl binder;
   private final MapCreator mapCreator;
@@ -36,13 +38,13 @@ class MapMultiBindingBuilderImpl<K, V> implements Binder.MapMultiBindingBuilder<
   }
 
   @Override
-  public Binder.KeyBinder<K, V> bind(K key) {
+  public KeyBinder<K, V> bind(K key) {
     return new KeyBinderImpl(key);
   }
 
   class KeyBinderImpl implements
-      Binder.KeyBinder<K, V>,
-      LinkedBuilder<Binder.MapMultiBindingBuilder<K, V>, V> {
+      KeyBinder<K, V>,
+      LinkedBuilder<MapMultiBindingBuilder<K, V>, V> {
 
     private final K key;
 
@@ -56,7 +58,7 @@ class MapMultiBindingBuilderImpl<K, V> implements Binder.MapMultiBindingBuilder<
     }
 
     @Override
-    public Binder.MapMultiBindingBuilder<K, V> toProvider(Provider<? extends V> provider) {
+    public MapMultiBindingBuilder<K, V> toProvider(Provider<? extends V> provider) {
       Validate.notNull(provider, "provider");
       StdProvider<? extends Map<K, V>> mapProvider = binder.getProvider(mapKey);
 
@@ -78,7 +80,7 @@ class MapMultiBindingBuilderImpl<K, V> implements Binder.MapMultiBindingBuilder<
     }
 
     @Override
-    public Binder.MapMultiBindingBuilder<K, V> toInstance(V instance) {
+    public MapMultiBindingBuilder<K, V> toInstance(V instance) {
       return toProvider(Providers.instanceProvider(key(), instance));
     }
   }

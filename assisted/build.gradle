@@ -1,0 +1,6 @@
+dependencies {
+  implementation project(':core')
+  implementation 'javax.inject:javax.inject:1'
+
+  testAnnotationProcessor project
+}

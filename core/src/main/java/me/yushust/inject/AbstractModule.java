@@ -31,14 +31,6 @@ public abstract class AbstractModule implements Module {
     return binder().bind(keyType);
   }
 
-  protected final <T> Binder.MultiBindingBuilder<T> multibind(Class<T> keyType) {
-    return binder().multibind(keyType);
-  }
-
-  protected final <T> Binder.MultiBindingBuilder<T> multibind(TypeReference<T> keyType) {
-    return binder().multibind(keyType);
-  }
-
   protected final void install(Module... modules) {
     binder().install(modules);
   }

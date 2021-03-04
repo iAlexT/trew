@@ -6,7 +6,6 @@ import me.yushust.inject.error.BindingException;
 import me.yushust.inject.error.ErrorAttachableImpl;
 import me.yushust.inject.key.Key;
 import me.yushust.inject.key.TypeReference;
-import me.yushust.inject.multibinding.MultiBindingBuilderImpl;
 import me.yushust.inject.provision.Providers;
 import me.yushust.inject.provision.StdProvider;
 import me.yushust.inject.provision.std.generic.impl.TypeReferenceGenericProvider;
@@ -48,11 +47,6 @@ public class BinderImpl extends ErrorAttachableImpl implements Binder {
   @Override
   public <T> QualifiedBindingBuilder<T> bind(TypeReference<T> keyType) {
     return new BindingBuilderImpl<>(this, keyType);
-  }
-
-  @Override
-  public <T> Binder.MultiBindingBuilder<T> multibind(TypeReference<T> keyType) {
-    return new MultiBindingBuilderImpl<>(this, keyType);
   }
 
   /** Throws the errors attached to this attachable */

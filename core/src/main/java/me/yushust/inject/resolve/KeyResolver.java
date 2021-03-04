@@ -1,7 +1,6 @@
 package me.yushust.inject.resolve;
 
 import me.yushust.inject.impl.Annotations;
-import me.yushust.inject.assisted.Assist;
 import me.yushust.inject.key.InjectedKey;
 import me.yushust.inject.key.Key;
 import me.yushust.inject.key.TypeReference;
@@ -39,7 +38,6 @@ public final class KeyResolver {
       Annotation[] annotations
   ) {
     boolean optional = false;
-    boolean assisted = false;
     Class<? extends Annotation> qualifierType = null;
     Annotation qualifier = null;
 
@@ -52,9 +50,6 @@ public final class KeyResolver {
           optional = true;
           continue;
         }
-      }
-      if (!assisted && annotationType == Assist.class) {
-        assisted = true;
       }
       if (
           qualifierType == null
@@ -70,7 +65,7 @@ public final class KeyResolver {
     }
 
     Key<T> key = Key.of(type, qualifierType, qualifier);
-    return new InjectedKey<>(key, optional, assisted);
+    return new InjectedKey<>(key, optional, false);
   }
 
 }

@@ -1,6 +1,5 @@
 package me.yushust.inject.assisted.provision;
 
-import me.yushust.inject.assisted.ValueFactory;
 import me.yushust.inject.impl.InjectorImpl;
 import me.yushust.inject.impl.ProvisionStack;
 import me.yushust.inject.key.Key;
@@ -21,7 +20,7 @@ public class ProxiedFactoryProvider<T>
     extends StdProvider<T>
     implements InjectionListener {
 
-  private final Class<? extends ValueFactory> factory;
+  private final Class<?> factory;
   private final Method method;
   private final List<InjectedKey<?>> keys;
   private final InjectableConstructor constructor;
@@ -29,7 +28,7 @@ public class ProxiedFactoryProvider<T>
   private T factoryInstance;
 
   ProxiedFactoryProvider(
-      Class<? extends ValueFactory> factory,
+      Class<?> factory,
       Method method,
       List<InjectedKey<?>> keys,
       InjectableConstructor constructor,
@@ -42,7 +41,7 @@ public class ProxiedFactoryProvider<T>
     this.key = key;
   }
 
-  public Class<? extends ValueFactory> getFactory() {
+  public Class<?> getFactory() {
     return factory;
   }
 

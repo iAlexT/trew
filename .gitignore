@@ -11,3 +11,5 @@
 # build dirs
 /build/
 /core/build/
+/assisted/build/
+/multibinding/build/

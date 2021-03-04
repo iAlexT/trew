@@ -1,15 +1,19 @@
 package me.yushust.inject.multibinding;
 
-import me.yushust.inject.Binder;
-import me.yushust.inject.impl.*;
+import me.yushust.inject.impl.BinderImpl;
+import me.yushust.inject.impl.KeyBuilder;
 import me.yushust.inject.key.Key;
 import me.yushust.inject.key.TypeReference;
+import me.yushust.inject.multibinding.builder.CollectionMultiBindingBuilder;
+import me.yushust.inject.multibinding.builder.MapMultiBindingBuilder;
+import me.yushust.inject.multibinding.builder.MultiBindingBuilder;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class MultiBindingBuilderImpl<T> implements
-    Binder.MultiBindingBuilder<T>,
-    KeyBuilder<Binder.MultiBindingBuilder<T>, T> {
+    MultiBindingBuilder<T>,
+    KeyBuilder<MultiBindingBuilder<T>, T> {
 
   private Key<T> key;
   private final BinderImpl binder;
@@ -21,13 +25,13 @@ public class MultiBindingBuilderImpl<T> implements
 
   /** Starts building a binding using the given collection creator */
   @Override
-  public Binder.CollectionMultiBindingBuilder<T> asCollection(Class<?> baseType, CollectionCreator collectionCreator) {
+  public CollectionMultiBindingBuilder<T> asCollection(Class<?> baseType, CollectionCreator collectionCreator) {
     Key<List<T>> listKey = Key.of(TypeReference.of(baseType, key.getType().getType()));
     return new CollectionMultiBindingBuilderImpl<>(binder, listKey, key, collectionCreator);
   }
 
   @Override
-  public <K> Binder.MapMultiBindingBuilder<K, T> asMap(TypeReference<K> keyReference, MapCreator mapCreator) {
+  public <K> MapMultiBindingBuilder<K, T> asMap(TypeReference<K> keyReference, MapCreator mapCreator) {
     Key<Map<K, T>> mapKey = Key.of(TypeReference.mapTypeOf(keyReference, key.getType()));
     return new MapMultiBindingBuilderImpl<>(binder, mapCreator, mapKey, key);
   }
@@ -43,7 +47,7 @@ public class MultiBindingBuilderImpl<T> implements
   }
 
   @Override
-  public Binder.MultiBindingBuilder<T> getReturnValue() {
+  public MultiBindingBuilder<T> getReturnValue() {
     return this;
   }
 

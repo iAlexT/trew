@@ -1,9 +1,9 @@
 package me.yushust.inject.multibinding;
 
-import me.yushust.inject.Binder;
 import me.yushust.inject.impl.BinderImpl;
 import me.yushust.inject.impl.LinkedBuilder;
 import me.yushust.inject.key.Key;
+import me.yushust.inject.multibinding.builder.CollectionMultiBindingBuilder;
 import me.yushust.inject.provision.Providers;
 import me.yushust.inject.provision.StdProvider;
 import me.yushust.inject.scope.Scope;
@@ -19,8 +19,8 @@ import java.util.Collection;
  * @param <E> The type of the elements
  */
 class CollectionMultiBindingBuilderImpl<E> implements
-    Binder.CollectionMultiBindingBuilder<E>,
-    LinkedBuilder<Binder.CollectionMultiBindingBuilder<E>, E> {
+    CollectionMultiBindingBuilder<E>,
+    LinkedBuilder<CollectionMultiBindingBuilder<E>, E> {
 
   private final BinderImpl binder;
   private final Key<? extends Collection<E>> collectionKey;
@@ -51,7 +51,7 @@ class CollectionMultiBindingBuilderImpl<E> implements
   }
 
   @Override
-  public Binder.CollectionMultiBindingBuilder<E> toProvider(Provider<? extends E> provider) {
+  public CollectionMultiBindingBuilder<E> toProvider(Provider<? extends E> provider) {
 
     Validate.notNull(provider, "provider");
     StdProvider<? extends Collection<E>> collectionProvider = binder.getProvider(collectionKey);
@@ -74,7 +74,7 @@ class CollectionMultiBindingBuilderImpl<E> implements
   }
 
   @Override
-  public Binder.CollectionMultiBindingBuilder<E> toInstance(E instance) {
+  public CollectionMultiBindingBuilder<E> toInstance(E instance) {
     return toProvider(Providers.instanceProvider(elementKey, instance));
   }
 

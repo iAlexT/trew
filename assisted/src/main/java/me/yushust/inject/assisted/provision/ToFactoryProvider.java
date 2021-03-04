@@ -2,7 +2,6 @@ package me.yushust.inject.assisted.provision;
 
 import me.yushust.inject.assisted.Assisted;
 import me.yushust.inject.error.FactoryException;
-import me.yushust.inject.assisted.ValueFactory;
 import me.yushust.inject.impl.BinderImpl;
 import me.yushust.inject.key.Key;
 import me.yushust.inject.key.TypeReference;
@@ -28,9 +27,9 @@ public class ToFactoryProvider<T>
     extends StdProvider<T>
     implements BindListener {
 
-  private final Class<? extends ValueFactory> factory;
+  private final Class<?> factory;
 
-  public ToFactoryProvider(Class<? extends ValueFactory> factory) {
+  public ToFactoryProvider(Class<?> factory) {
     this.factory = Validate.notNull(factory, "factory");
   }
 

@@ -1,6 +1,5 @@
 package me.yushust.inject.provision.ioc;
 
-import me.yushust.inject.assisted.provision.ToFactoryProvider;
 import me.yushust.inject.impl.BinderImpl;
 import me.yushust.inject.key.Key;
 
@@ -23,7 +22,7 @@ public interface BindListener {
    * @param key    The bound key
    * @return False if the binding must be removed (handled
    * by the binder) this is used for special providers like
-   * the {@link ToFactoryProvider} that converts its binding
+   * the assisted inject provider that converts its binding
    * to another binding. (Removes its binding and adds another one)
    */
   boolean onBind(BinderImpl binder, Key<?> key);
