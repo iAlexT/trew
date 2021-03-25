@@ -2,7 +2,7 @@
 
 ### Pull Requests and Code Style
 Pull requests must have a good description, a reason for existing, and an acceptable code
-- **Bad:** "Add nice feature"
+- **Bad:** "Add a nice feature"
 - **Bad:** "Fix bug"
 - **Good:** "Add assisted injections to the core module"
 - **Good:** "Fix binding duplication bug in multi-bindings"
@@ -10,7 +10,7 @@ Pull requests must have a good description, a reason for existing, and an accept
 Follow **D.R.Y.** and **K.I.S.S.** principles.
 
 **Pull Requests fixing typos or other very simple things aren't merged!, report it in an Issue**
-There're some rules for commiting to a pull request:
+There are some rules for committing to a pull request:
 - Don't made big changes in one commit, separate them into other commits explaining its reason to exist.
 - Add documentation!
 - If the modification is big, please put it in a separate module, it will be tested and moved to the core later (if necessary)
